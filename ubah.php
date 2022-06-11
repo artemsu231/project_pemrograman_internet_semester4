@@ -15,41 +15,11 @@ WHERE id_barang='$id'")[0];
 $qkat = query("SELECT * FROM kategori");
 
 if (isset($_POST["ubah"])) {
-    // var_dump($_POST);
-    $id = $_POST["id"];
-    $id_barang = $_POST["id_barang"];
-    $id_kategori = htmlspecialchars($_POST["id_kategori"]);
-    $nama_barang = htmlspecialchars($_POST["nama_barang"]);
-    $merk = htmlspecialchars($_POST["merk"]);
-    $harga_beli = htmlspecialchars($_POST["harga_beli"]);
-    $harga_jual = htmlspecialchars($_POST["harga_jual"]);
-    $satuan_barang = htmlspecialchars($_POST["satuan_barang"]);
-    $stok = htmlspecialchars($_POST["stok"]);
-    $tgl_update = htmlspecialchars($_POST["tgl_update"]);
 
-    $query = "UPDATE barang SET
-    id='$id',
-    id_kategori='$id_kategori',
-    nama_barang='$nama_barang',
-    merk='$merk',
-    harga_beli='$harga_beli',
-    harga_jual='$harga_jual',
-    satuan_barang='$satuan_barang',
-    stok='$stok',
-    tgl_input='10 June 2022, 16:47',
-    tgl_update='$tgl_update'
-     WHERE id_barang='$id_barang'";
-    $hasil = mysqli_query($conn, $query);
-    // var_dump($hasil);
-    // cek berhasil ubah
-    if ($hasil) {
-        echo '<script>window.location="barang.php"</script>';
+    if (ubah($_POST) > 0) {
+        echo '<script>alert("Update Sukses");window.location="barang.php"</script>';
     } else {
-
-        echo "<script>
-        alert(data gagal diubah!);
-        document.location.href='barang.php';
-        </script>";
+        echo '<script>window.location="barang.php"</script>';
     }
 }
 
@@ -88,7 +58,7 @@ if (isset($_POST["ubah"])) {
                         <tr>
                             <td>ID Barang</td>
                             <input type="hidden" name="id" id="id" value="<?= $brg["id"] ?>">
-                            <td><input type="text" readonly="readonly" required value="<?= $brg["id_barang"]; ?>" class="form-control" name="id_barang"></td>
+                            <td><input type="text" readonly="readonly" required value="<?= $brg["id_barang"] ?>" class="form-control" name="id_barang"></td>
                         </tr>
                         <tr>
                             <td>Kategori</td>
@@ -136,6 +106,7 @@ if (isset($_POST["ubah"])) {
                         </tr>
                         <tr>
                             <td>Tanggal Update</td>
+                            <input type="hidden" name="tgl_input" value="<?= $brg["tgl_input"] ?>">
                             <td><input type="text" required readonly="readonly" class="form-control" value="<?php date_default_timezone_set('Asia/Jakarta');
                                                                                                             echo  date("j F Y, H:i"); ?>" name="tgl_update"></td>
                         </tr>
@@ -152,7 +123,7 @@ if (isset($_POST["ubah"])) {
         </div>
 
         <!-- </section>/.content -->
-        <?php require 'template/footer.php'; ?>
+        <!-- <.?php require 'template/footer.php'; ?> -->
 </aside><!-- /.right-side -->
 </div><!-- ./wrapper -->
 <!-- jQuery 2.0.2 -->

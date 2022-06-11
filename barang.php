@@ -92,7 +92,7 @@
                                         <td>
                                             <a href="detail_barang.php?id_barang=<?= $row["id_barang"] ?>"><button class="btn btn-primary btn-xs">Detail </button></a>
                                             <a href="ubah.php?id_barang=<?= $row["id_barang"] ?>"><button class="btn btn-warning btn-xs">Ubah </button> </a>
-                                            <a href="hapus.php?id_barang=<?= $row["id_barang"] ?>"><button class="btn btn-danger btn-xs">Hapus </button></a>
+                                            <a href="hapus.php?id_barang=<?= $row["id_barang"] ?>" onclick="javascript:return confirm('Hapus Data barang ?');"><button class="btn btn-danger btn-xs">Hapus </button></a>
                                         </td>
                                     </tr>
                                     <?php $i++;

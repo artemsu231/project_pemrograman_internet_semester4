@@ -11,7 +11,8 @@ $barang = query("select barang.*, kategori.id_kategori, kategori.nama_kategori
 from barang inner join kategori on barang.id_kategori = kategori.id_kategori");
 // var_dump($barang);
 // die;
-// $user = query("SELECT * FROM login");
+$atur = mysqli_query($conn, "SELECT * FROM identitas_toko");
+$setting = mysqli_fetch_array($atur);
 $user1 = $_SESSION["user"];
 $user2 = ucfirst($user1);
 
@@ -22,7 +23,7 @@ $user2 = ucfirst($user1);
 
 <head>
     <meta charset="UTF-8">
-    <title>Toko | <?php echo $title; ?></title>
+    <title><?= $setting['nama_toko']; ?> | <?php echo $title; ?></title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.0.2 -->
     <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -82,7 +83,7 @@ $user2 = ucfirst($user1);
     <header class="header" id="header">
         <a href="index.php" class="logo">
             <!-- Add the class icon to your logo image or logo icon to add the margining -->
-            AdminLTE
+            <?= $setting['nama_toko']; ?>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -95,7 +96,11 @@ $user2 = ucfirst($user1);
             </a>
 
             <h1 class="navbar-btn sidebar-toggle"> </h1>
-            <h4 class="navbar-btn sidebar-toggle" style="color: #f9f9f9; font-family:  'cursive'" ;> Jl. Pegangsaan Timur No.12</h4>
+            <h4 class="navbar-btn sidebar-toggle" style="color: #f9f9f9; font-family:  'cursive'" ;>
+                <i class="fa fa-home"></i> &nbsp;<?= $setting['alamat_toko']; ?> &nbsp;&nbsp;|&nbsp;&nbsp;
+                <i class="fa fa-phone"></i>&nbsp; <?= $setting['telp']; ?>&nbsp;&nbsp;|&nbsp;&nbsp;
+                <i class="fa fa-user"></i>&nbsp; <?= $setting['nama_pemilik']; ?>
+            </h4>
 
             <div class=" navbar-right">
                 <ul class="nav navbar-nav">

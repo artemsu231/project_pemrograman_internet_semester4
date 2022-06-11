@@ -86,6 +86,7 @@ function tambah($data)
 function ubah($data)
 {
     global $conn;
+    $id = $_POST["id"];
     $id_barang = $data["id_barang"];
     $id_kategori = htmlspecialchars($data["id_kategori"]);
     $nama_barang = htmlspecialchars($data["nama_barang"]);
@@ -94,9 +95,11 @@ function ubah($data)
     $harga_jual = htmlspecialchars($data["harga_jual"]);
     $satuan_barang = htmlspecialchars($data["satuan_barang"]);
     $stok = htmlspecialchars($data["stok"]);
+    $tgl_input = htmlspecialchars($data["tgl_input"]);
     $tgl_update = htmlspecialchars($data["tgl_update"]);
 
     $query = "UPDATE barang SET
+    id='$id',
     id_kategori='$id_kategori',
     nama_barang='$nama_barang',
     merk='$merk',
@@ -104,10 +107,28 @@ function ubah($data)
     harga_jual='$harga_jual',
     satuan_barang='$satuan_barang',
     stok='$stok',
+    tgl_input='$tgl_input',
     tgl_update='$tgl_update'
-     WHERE id='$id_barang'";
+     WHERE id_barang='$id_barang'";
     mysqli_query($conn, $query);
-    // mysqli_query($conn, 'UPDATE barang SET id_kategori=?, nama_barang=?, merk=?, 
-    // harga_beli=?, harga_jual=?, satuan_barang=?, stok=?, tgl_update=?  WHERE id_barang=?');
+    return mysqli_affected_rows($conn);
+}
+
+function updateToko($data)
+{
+    global $conn;
+    $nama_toko = htmlspecialchars($data["nama_toko"]);
+    $alamat_toko = htmlspecialchars($data["alamat_toko"]);
+    $telp = htmlspecialchars($data["telp"]);
+    $nama_pemilik = htmlspecialchars($data["nama_pemilik"]);
+    $id_toko = 1;
+
+    $query = "UPDATE identitas_toko SET
+    nama_toko='$nama_toko',
+    alamat_toko='$alamat_toko',
+    telp='$telp',
+    nama_pemilik='$nama_pemilik'
+    WHERE id_toko='$id_toko'";
+    mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
 }

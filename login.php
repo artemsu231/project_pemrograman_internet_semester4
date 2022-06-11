@@ -30,7 +30,8 @@ if (isset($_POST["login"])) {
             //     // setcookie('login', 'true', time() + 60);
             // }
         }
-        header("Location: index.php");
+        // header("Location: index.php");
+        echo '<script>alert("Login Sukses");window.location="index.php"</script>';
         exit;
     }
     $error = true;
